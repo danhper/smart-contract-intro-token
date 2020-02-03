@@ -64,6 +64,7 @@ contract MyToken {
   function transferFrom(address _from, address _to, uint256 _value) public returns (bool) {
     require(balances[_from] >= _value, "balance too low");
     require(allowances[_from][_to] >= _value, "insufficient allowance");
+    allowances[_from][msg.sender] -= _value;
     return executeTransfer(_from, _to, _value);
   }
 
